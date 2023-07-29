@@ -27,9 +27,11 @@ async def get_report(
     projects = await project_crud.get_projects_by_completion_rate(session)
     spreadsheetid = await spreadsheets_create(wrapper_services)
     await set_user_permissions(spreadsheetid, wrapper_services)
-    response = await spreadsheets_update_value(spreadsheetid,
-                                    projects,
-                                    wrapper_services)
+    response = await spreadsheets_update_value(
+        spreadsheetid,
+        projects,
+        wrapper_services
+    )
     return (
         f'https://docs.google.com/spreadsheets/d/{response["spreadsheetId"]}'
     )

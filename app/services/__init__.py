@@ -1,4 +1,6 @@
-from .google_api import (
-    set_user_permissions, spreadsheets_create, spreadsheets_update_value
+from .google_api import ( # noqa
+    set_user_permissions, # noqa
+    spreadsheets_create, # noqa
+    spreadsheets_update_value # noqa
 ) # noqa
 from .invest import investing # noqa
