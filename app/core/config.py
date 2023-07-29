@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     secret: str = 'SECRET'
     first_superuser_email: Optional[EmailStr] = None
     first_superuser_password: Optional[str] = None
+    email: Optional[str] = None  # email google
     # api key google:
     type: Optional[str] = None
     project_id: Optional[str] = None
@@ -20,7 +21,6 @@ class Settings(BaseSettings):
     token_uri: Optional[str] = None
     auth_provider_x509_cert_url: Optional[str] = None
     client_x509_cert_url: Optional[str] = None
-    email: Optional[str] = None # email google
     # Constants:
     JWT_LIFETIME: int = 3600
     MIN_PASSWORD_LENGTH: int = 3
