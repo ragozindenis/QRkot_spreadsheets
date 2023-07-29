@@ -18,6 +18,14 @@
 * Создание отчета о завершённых инвестициях в google spreadsheets.
 * Автоматическое создание пользователя с правами администратора.
 
+### Технологии:
+
+Проект создан с использованием:
+* Python version: 3.10.6
+* FastAPI version: 0.78.0
+* SQLAlchemy version: 1.4.36
+* Google API
+
 ## Как запустить проект:
 
 ### 1. Клонировать репозиторий и перейти в него в командной строке:
@@ -76,6 +84,107 @@ uvicorn app.main:app --reload
 ```
 
 ## После запуска будет доступна документация api:
+```
+http://127.0.0.1:8000/docs
+```
+```
+http://127.0.0.1:8000/redoc
+```
+
+## Примеры запросов:
+### Запрос всех проектов (GET):
+* GET http://127.0.0.1:8000/charity_project/
+* Successful Response:
+```
+[
+  {
+    "name": "string",
+    "description": "string",
+    "full_amount": 0,
+    "id": 0,
+    "invested_amount": 0,
+    "fully_invested": true,
+    "create_date": "2023-07-29T20:05:12.440Z",
+    "close_date": "2023-07-29T20:05:12.440Z"
+  }
+]
+```
+
+### Создание проекта (POST):
+* POST http://127.0.0.1:8000/charity_project/
+* Request body:
+```
+{
+  "name": "string",
+  "description": "string",
+  "full_amount": 0
+}
+```
+* Successful Response:
+```
+{
+  "name": "string",
+  "description": "string",
+  "full_amount": 0,
+  "id": 0,
+  "invested_amount": 0,
+  "fully_invested": true,
+  "create_date": "2023-07-29T20:08:05.975Z",
+  "close_date": "2023-07-29T20:08:05.975Z"
+}
+```
+
+### Запрос всех пожертвований (GET):
+* GET http://127.0.0.1:8000/donation/
+* Successful Response:
+```
+[
+  {
+    "full_amount": 0,
+    "comment": "string",
+    "id": 0,
+    "user_id": 0,
+    "invested_amount": 0,
+    "fully_invested": true,
+    "create_date": "2023-07-29T20:15:56.029Z",
+    "close_date": "2023-07-29T20:15:56.030Z"
+  }
+]
+```
+
+### Создание пожертвования (POST):
+* POST http://127.0.0.1:8000/donation/
+* Request body:
+```
+{
+  "full_amount": 0,
+  "comment": "string"
+}
+```
+* Successful Response:
+```
+{
+  "full_amount": 0,
+  "comment": "string",
+  "id": 0,
+  "user_id": 0,
+  "invested_amount": 0,
+  "fully_invested": true,
+  "create_date": "2023-07-29T20:16:17.163Z",
+  "close_date": "2023-07-29T20:16:17.163Z"
+}
+```
+
+### Получить отчет в google sheets (POST):
+* POST http://127.0.0.1:8000/google/
+* Successful Response:
+```
+{
+  "url_google_sheets": "https://docs.google.com/spreadsheets/d/{spreadsheetid}"
+}
+```
+
+## C Полной документацией можно ознакомиться тут:
 ```
 http://127.0.0.1:8000/docs
 ```

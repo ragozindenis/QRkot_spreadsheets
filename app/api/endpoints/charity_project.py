@@ -49,8 +49,7 @@ async def get_all_meeting_rooms(
     session: AsyncSession = Depends(get_async_session),
 ) -> list[ProjectDB]:
     """Запрос всех проектов"""
-    all_rooms = await project_crud.get_multi(session)
-    return all_rooms
+    return await project_crud.get_multi(session)
 
 
 @router.delete(
@@ -68,10 +67,7 @@ async def remove_meeting_room(
     )
     await check_if_already_invested_in_project(project_id, session)
     await check_if_project_is_closed(project_id, session)
-    project = await project_crud.remove(
-        project, session
-    )
-    return project
+    return await project_crud.remove(project, session)
 
 
 @router.patch(
@@ -95,7 +91,4 @@ async def partially_update_project(
         await check_full_amount(
             project_id, obj_in, session
         )
-    project = await project_crud.update(
-        project, obj_in, session
-    )
-    return project
+    return await project_crud.update(project, obj_in, session)

@@ -1,18 +1,21 @@
 from datetime import datetime
-from fastapi import HTTPException
+from http import HTTPStatus
 from typing import Optional
 
+from fastapi import HTTPException
 from pydantic import BaseModel, Extra, Field, validator
+
+from app.core import settings
 
 
 class ProjectBase(BaseModel):
-    name: str = Field(..., max_length=100)
+    name: str = Field(..., max_length=settings.MAX_LENGTH)
     description: str
-    full_amount: int = Field(..., gt=0)
+    full_amount: int = Field(..., gt=settings.DEFAULT_VALUE_FULL_AMOUNT)
 
     class Config:
         extra = Extra.forbid
-        min_anystr_length = 1
+        min_anystr_length = settings.MIN_LENGTH
 
 
 class ProjectCreate(ProjectBase):
@@ -44,7 +47,7 @@ class ProjectUpdate(ProjectBase):
     def cannot_be_null(cls, value):
         if not value:
             raise HTTPException(
-                status_code=422,
+                status_code=HTTPStatus.UNPROCESSABLE_ENTITY,
                 detail='Нельзя передать null'
             )
         return value
